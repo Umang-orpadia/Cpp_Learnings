@@ -2,6 +2,7 @@
 #include<conio.h>
 #include<fstream.h>
 	  //file pehele save karlo output screen freez hone ke chances hai.
+//readF1 wale pe jao
 int main()
 {
  clrscr();
