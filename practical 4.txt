@@ -1,0 +1,243 @@
+mysql> use fycs;
+Database changed
+mysql> create table customer(custid int unique,custname varchar(10),city varchar(10) default 'Mumbai',contact int,country varchar(10) default 'India');
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into customer(custid,custname,contact) values(1,'Prajeet',12345);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into customer(custid,custname,contact) values(1,'Umang',12345);
+ERROR 1062 (23000): Duplicate entry '1' for key 'customer.custid'
+mysql> insert into customer(custid,custname,contact) values(2,'Umang',12345);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer(custid,custname,contact) values(3,'Aryan',12345);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer(custid,custname,contact) values(4,'Sahil',12345);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer(custid,custname,contact) values(5,'Pratham',12345);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from customer;
++--------+----------+--------+---------+---------+
+| custid | custname | city   | contact | country |
++--------+----------+--------+---------+---------+
+|      1 | Prajeet  | Mumbai |   12345 | India   |
+|      2 | Umang    | Mumbai |   12345 | India   |
+|      3 | Aryan    | Mumbai |   12345 | India   |
+|      4 | Sahil    | Mumbai |   12345 | India   |
+|      5 | Pratham  | Mumbai |   12345 | India   |
++--------+----------+--------+---------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select country,city from customer;
++---------+--------+
+| country | city   |
++---------+--------+
+| India   | Mumbai |
+| India   | Mumbai |
+| India   | Mumbai |
+| India   | Mumbai |
+| India   | Mumbai |
++---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select custname,city from customer;
++----------+--------+
+| custname | city   |
++----------+--------+
+| Prajeet  | Mumbai |
+| Umang    | Mumbai |
+| Aryan    | Mumbai |
+| Sahil    | Mumbai |
+| Pratham  | Mumbai |
++----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select country from customer;
++---------+
+| country |
++---------+
+| India   |
+| India   |
+| India   |
+| India   |
+| India   |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct country from customer;
++---------+
+| country |
++---------+
+| India   |
++---------+
+1 row in set (0.01 sec)
+
+mysql> select country from customer where country='India';
++---------+
+| country |
++---------+
+| India   |
+| India   |
+| India   |
+| India   |
+| India   |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> create table products(productid int unique,productname varchar(10),price int,unit int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into products values(1,'Charger',1000,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into products values(2,'Cable',500,3);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into products values(3,'Extention',200,8);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into products values(4,'Chair',2000,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into products values(5,'keyboard',700,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from products;
++-----------+-------------+-------+------+
+| productid | productname | price | unit |
++-----------+-------------+-------+------+
+|         1 | Charger     |  1000 |    1 |
+|         2 | Cable       |   500 |    3 |
+|         3 | Extention   |   200 |    8 |
+|         4 | Chair       |  2000 |    2 |
+|         5 | keyboard    |   700 |    1 |
++-----------+-------------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from products where price=1000;
++-----------+-------------+-------+------+
+| productid | productname | price | unit |
++-----------+-------------+-------+------+
+|         1 | Charger     |  1000 |    1 |
++-----------+-------------+-------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from products where price<500;
++-----------+-------------+-------+------+
+| productid | productname | price | unit |
++-----------+-------------+-------+------+
+|         3 | Extention   |   200 |    8 |
++-----------+-------------+-------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from products where price!=100;
++-----------+-------------+-------+------+
+| productid | productname | price | unit |
++-----------+-------------+-------+------+
+|         1 | Charger     |  1000 |    1 |
+|         2 | Cable       |   500 |    3 |
+|         3 | Extention   |   200 |    8 |
+|         4 | Chair       |  2000 |    2 |
+|         5 | keyboard    |   700 |    1 |
++-----------+-------------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from products where price<>100;
++-----------+-------------+-------+------+
+| productid | productname | price | unit |
++-----------+-------------+-------+------+
+|         1 | Charger     |  1000 |    1 |
+|         2 | Cable       |   500 |    3 |
+|         3 | Extention   |   200 |    8 |
+|         4 | Chair       |  2000 |    2 |
+|         5 | keyboard    |   700 |    1 |
++-----------+-------------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer where city like 'M%';
++--------+----------+--------+---------+---------+
+| custid | custname | city   | contact | country |
++--------+----------+--------+---------+---------+
+|      1 | Prajeet  | Mumbai |   12345 | India   |
+|      2 | Umang    | Mumbai |   12345 | India   |
+|      3 | Aryan    | Mumbai |   12345 | India   |
+|      4 | Sahil    | Mumbai |   12345 | India   |
+|      5 | Pratham  | Mumbai |   12345 | India   |
++--------+----------+--------+---------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer where city ='Mumbai';
++--------+----------+--------+---------+---------+
+| custid | custname | city   | contact | country |
++--------+----------+--------+---------+---------+
+|      1 | Prajeet  | Mumbai |   12345 | India   |
+|      2 | Umang    | Mumbai |   12345 | India   |
+|      3 | Aryan    | Mumbai |   12345 | India   |
+|      4 | Sahil    | Mumbai |   12345 | India   |
+|      5 | Pratham  | Mumbai |   12345 | India   |
++--------+----------+--------+---------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select min(price) from products;
++------------+
+| min(price) |
++------------+
+|        200 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(price) from products;
++------------+
+| max(price) |
++------------+
+|       2000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(price) from products;
++------------+
+| avg(price) |
++------------+
+|   880.0000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> create table orderdetails(orderdetailid int,orderid int,productid int,quantity int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into orderdetails values(1,2,3,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into orderdetails values(2,3,4,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orderdetails values(3,4,5,3);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orderdetails values(4,5,6,4);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from orderdetails;
++---------------+---------+-----------+----------+
+| orderdetailid | orderid | productid | quantity |
++---------------+---------+-----------+----------+
+|             1 |       2 |         3 |        1 |
+|             2 |       3 |         4 |        2 |
+|             3 |       4 |         5 |        3 |
+|             4 |       5 |         6 |        4 |
++---------------+---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select sum(quantity) from orderdetails;
++---------------+
+| sum(quantity) |
++---------------+
+|            10 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql>
